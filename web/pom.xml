@@ -23,7 +23,15 @@
     </dependencies>
   </dependencyManagement>
   -->
+  <properties>
+      <!-- Adapt this to a version found on
+           http://central.maven.org/maven2/org/eclipse/jetty/jetty-maven-plugin/
+        -->
+      <jettyVersion>9.0.2.v20130417</jettyVersion>
+  </properties>
+ 
 
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -56,6 +64,21 @@
       <artifactId>jersey-media-moxy</artifactId>
       <version>2.22.1</version>
     </dependency>
+    <dependency>
+  	  <groupId>io.swagger</groupId>
+  	  <artifactId>swagger-jersey2-jaxrs</artifactId>
+  	  <version>1.5.0</version>
+	</dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-server</artifactId>
+      <version>${jettyVersion}</version>
+    </dependency>
+     <dependency>
+       <groupId>org.eclipse.jetty</groupId>
+       <artifactId>jetty-servlet</artifactId>
+       <version>${jettyVersion}</version>
+  	</dependency>
   </dependencies>
 
 
@@ -86,6 +109,17 @@
                     <mainClass>com.enforce.detection.web.Main</mainClass>
                 </configuration>
             </plugin>
+	      <plugin>
+	        <groupId>org.codehaus.mojo</groupId>
+	        <artifactId>exec-maven-plugin</artifactId>
+	        <version>1.1</version>
+	        <executions>
+	          <execution><goals><goal>java</goal></goals></execution>
+	        </executions>
+	        <configuration>
+	          <mainClass>com.enforce.detection.web.JettyMain</mainClass>
+	        </configuration>
+	      </plugin>
         </plugins>
     </build>
 
